@@ -1,11 +1,14 @@
 package com.cursospring.eventoapp.models;
 
+import java.util.List;
+
 // import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +26,8 @@ public class Evento {
     private String local;
     private String data;
     private String horario;
+    @OneToMany
+    private List<Convidado> convidados;
 
     public Evento() {}
 
