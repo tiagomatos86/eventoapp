@@ -4,13 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="convidados")
 public class Convidado {
 
     @Id
+    @NotBlank(message = "O RG não pode ser vazio")
     private String rg; //por ser único o RG é notado como id
+    
+    @NotBlank(message = "O Nome não pode ser vazio")
     private String nomeConvidado;
 
     @ManyToOne
@@ -38,7 +43,4 @@ public class Convidado {
     public Evento getEvento() {
         return evento;
     }
-
-    
-
 }

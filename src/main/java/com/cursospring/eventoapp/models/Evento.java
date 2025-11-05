@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="eventos")
@@ -22,10 +23,18 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    @NotEmpty
     private String nome;
+
+    @NotEmpty
     private String local;
+
+    @NotEmpty
     private String data;
+
+    @NotEmpty
     private String horario;
+    
     @OneToMany
     private List<Convidado> convidados;
 
