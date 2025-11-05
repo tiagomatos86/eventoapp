@@ -84,4 +84,29 @@ public class EventoController {
         return "redirect:/{id}";
     }
     
+    // @RequestMapping("/deletarEvento/{id}")
+    // public String deletarEvento(@PathVariable("id") long id, RedirectAttributes attributes) {
+    //     Evento evento = er.findById(id).orElse(null);
+    //     if (evento != null) {
+    //         er.delete(evento);
+    //         attributes.addFlashAttribute("mensagem", "Evento excluído com sucesso!");
+    //     } else {
+    //         attributes.addFlashAttribute("mensagem", "Evento não encontrado.");
+    //     }
+    //     return "redirect:/eventos";
+    // }
+
+    @RequestMapping("/deletarEvento/{id}")
+    public String deletarEvento(@PathVariable("id") long id, RedirectAttributes attributes) {
+        Evento evento = er.findById(id).orElse(null);
+        if (evento != null) {
+            Iterable<Convidado> convidados = cr.findByEvento(evento);
+            cr.deleteAll(convidados); // exclui os convidados primeiro
+            er.delete(evento);        // agora pode excluir o evento
+            attributes.addFlashAttribute("mensagem", "Evento excluído com sucesso!");
+        } else {
+            attributes.addFlashAttribute("mensagem", "Evento não encontrado.");
+        }
+        return "redirect:/eventos";
+    }
 }
