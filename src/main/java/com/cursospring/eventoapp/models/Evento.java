@@ -2,6 +2,8 @@ package com.cursospring.eventoapp.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+
 // import java.io.Serializable;
 
 import jakarta.persistence.Entity;
@@ -35,7 +37,7 @@ public class Evento {
     @NotEmpty
     private String horario;
     
-    @OneToMany
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Convidado> convidados;
 
     public Evento() {}

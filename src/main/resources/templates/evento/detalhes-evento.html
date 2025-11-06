@@ -14,17 +14,15 @@
 <body>
     <h1>Evento</h1>
     <h3><a href="/eventos" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Lista de Eventos</a></h3>
-    <div th:each="evento : ${evento}" class="container">
+    
+    <!-- <div th:each="evento : ${evento}" class="container"> -->
+    <div class="container"></div>
         <div class="row">
             <p>Nome: <span th:text="${evento.nome}"></span></p>
             <p>Local: <span th:text="${evento.local}"></span></p>
             <p>Data: <span th:text="${evento.data}"></span></p>
             <p>Horário: <span th:text="${evento.horario}"></span></p>
         </div>
-
-        <th:block th:include="fragments/mensagem-validacao :: mensagem"></th:block>
-        <!-- <div th:replace="~{fragments/mensagem-validacao :: mensagem}"></div> -->
-
         <form method="POST" th:object="${convidado}">
             Nome: <input type="text" th:field="*{nomeConvidado}">
             RG: <input type="text" th:field="*{rg}">
@@ -32,7 +30,9 @@
         </form>
     </div>
 
-     <h5 >Lista de Convidados</h5>
+    <th:block th:replace="fragments/mensagem-validacao :: mensagem"></th:block>
+
+    <h5 >Lista de Convidados</h5>
     <div class="container" th:each="convidado : ${convidados}">
         <div class="row">
             <div class="input-field col s5">
@@ -41,12 +41,28 @@
              <div class="input-field col s3">
                 <p><span th:text = "${convidado.rg}" ></span></p>
             </div>
+            <div class="input-field col s2">
+                <a href="javascript:void(0);" 
+                    class="btn-floating red"
+                    th:attr="data-rg=${convidado.rg}"
+                    onclick="confirmarExclusaoConvidado(this)">
+                    <i class="material-icons">delete</i>
+                </a>
+            </div>
         </div>
     </div>
 
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-
+    <script>
+        function confirmarExclusaoConvidado(element) {
+            const rg = element.getAttribute("data-rg");
+            if (confirm("Você tem certeza que deseja excluir este convidado?")) {
+                // window.location.href = "/deletarConvidado/" + rg;
+                 window.location.href = "/deletarConvidado/" + encodeURIComponent(rg);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class Convidado {
     @NotBlank(message = "O Nome não pode ser vazio")
     private String nomeConvidado;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Evento evento;
 
     public String getRg() {

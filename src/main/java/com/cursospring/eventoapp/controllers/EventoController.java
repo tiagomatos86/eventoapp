@@ -83,18 +83,6 @@ public class EventoController {
         attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
         return "redirect:/{id}";
     }
-    
-    // @RequestMapping("/deletarEvento/{id}")
-    // public String deletarEvento(@PathVariable("id") long id, RedirectAttributes attributes) {
-    //     Evento evento = er.findById(id).orElse(null);
-    //     if (evento != null) {
-    //         er.delete(evento);
-    //         attributes.addFlashAttribute("mensagem", "Evento excluído com sucesso!");
-    //     } else {
-    //         attributes.addFlashAttribute("mensagem", "Evento não encontrado.");
-    //     }
-    //     return "redirect:/eventos";
-    // }
 
     @RequestMapping("/deletarEvento/{id}")
     public String deletarEvento(@PathVariable("id") long id, RedirectAttributes attributes) {
@@ -108,5 +96,19 @@ public class EventoController {
             attributes.addFlashAttribute("mensagem", "Evento não encontrado.");
         }
         return "redirect:/eventos";
+    }
+
+    @RequestMapping("/deletarConvidado/{rg:.+}")
+    public String deletarConvidado(@PathVariable("rg") String rg, RedirectAttributes attributes) {
+        Convidado convidado = cr.findByRg(rg);
+        if(convidado != null) {
+            Long eventoId = convidado.getEvento().getId(); // pega o ID do evento antes de excluir
+            cr.delete(convidado);
+            attributes.addFlashAttribute("mensagem", "Convidado excluído com sucesso!");
+            return "redirect:/" + eventoId; // redireciona para a página do evento
+        } else {
+            attributes.addFlashAttribute("mensagem", "Convidado não encontrado.");
+            return "redirect:/eventos";
+        }
     }
 }
