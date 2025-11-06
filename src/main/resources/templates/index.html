@@ -6,26 +6,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
-
+    
+    <link rel="stylesheet" href="style/style.css"/>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <style>
-        body {
-            background-color: rgb(44, 6, 121);
-        }
-
-        h1 {
-            /* font-size: 24px;
-            font-weight: bold;
-            text-align: center; */
-            color:aliceblue;
-        }
-    </style> -->
     <title>Index</title>
 </head>
 <body>
-    <h1>Lista de Eventos</h1>
-    <h3><a href="/cadastro-eventos" class="waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Cadastrar Eventos</a></h3>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Lista de Eventos</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/cadastro-eventos" class="waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Cadastrar Eventos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <th:block th:replace="fragments/mensagem-validacao :: mensagem"></th:block>
 
     <table class="container">
