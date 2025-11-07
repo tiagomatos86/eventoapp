@@ -30,3 +30,19 @@
     margin-top: 10px;
     margin-bottom: 35px;
 }
+
+.button-text {
+    color: #009688 ;
+}
+
+.button-color {
+    background-color:white ;
+}
+
+.button-color:hover {
+    background-color: #b2dfdb ;
+}
+
+.texto-da-nav {
+    padding-left: 20px;
+}
