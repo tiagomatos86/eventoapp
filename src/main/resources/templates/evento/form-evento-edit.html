@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="/style/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Evento</title>
+</head>
+<body>
+<header>
+    <nav class="teal darken-4">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"><span class="texto-da-nav">Editar Evento</span></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/eventos" class="waves-effect waves-light btn button-text button-color"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<th:block th:include="fragments/mensagem-validacao"></th:block>
+
+<div class="container form-eventos">
+    <form method="post" th:action="@{/atualizar-evento}" th:object="${evento}">
+        <input type="hidden" th:field="*{id}" />
+        Nome:<input type="text" th:field="*{nome}" />
+        <div class="row">
+            <div class="input-field col s5"> Local:<input type="text" th:field="*{local}" /></div>
+            <div class="input-field col s2"> Data:<input type="date" th:field="*{data}" /></div>
+            <div class="input-field col s2"> Horário:<input type="time" th:field="*{horario}" /></div>
+        </div>
+        <button class="waves-effect waves-light btn" type="submit">Atualizar</button>
+    </form>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

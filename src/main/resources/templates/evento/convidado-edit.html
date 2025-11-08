@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="/style/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Convidado</title>
+</head>
+<body>
+<header>
+    <nav class="teal darken-4">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"><span class="texto-da-nav">Editar Convidado</span></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/eventos" class="waves-effect waves-light btn button-text button-color"><i class="material-icons left">arrow_back</i>Lista de Eventos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container form-eventos">
+    <form method="post" th:action="@{/atualizar-convidado}" th:object="${convidado}">
+        <input type="hidden" th:field="*{evento.id}" />
+        <input type="hidden" th:field="*{rg}" />
+        Nome:<input type="text" th:field="*{nomeConvidado}" />
+        <div class="row">
+            <div class="input-field col s4"> RG:<input type="text" th:value="${convidado.rg}" disabled /></div>
+        </div>
+        <button class="waves-effect waves-light btn" type="submit">Salvar</button>
+    </form>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

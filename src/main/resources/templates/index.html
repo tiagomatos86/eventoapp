@@ -34,7 +34,8 @@
                 <th>Local</th>
                 <th>Data</th>
                 <th>Horário</th>
-                <th>Ações</th>
+                <th>Deletar</th>
+                <th>Atualizar</th>
             </tr>
         </thead>
         <tbody>
@@ -43,11 +44,20 @@
                 <td><span th:text="${evento.local}"></span></td>
                 <td><span th:text="${evento.data}"></span></td>
                 <td><span th:text="${evento.horario}"></span></td>
-                <td>
-                    <a href="#" class="material-icons left" th:onclick="'confirmarExclusao(' + ${evento.id} + ')'">
-                        <i class="material-icons">delete</i>
-                    </a>
-                </td>
+                <div class="icone-acao">
+                    <td class="icone-acao">
+                        <a href="#" class="material-icons left" th:onclick="'confirmarExclusao(' + ${evento.id} + ')'">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </div>
+                <div class="icone-acao">
+                    <td>
+                        <a th:href="@{'/editar-evento/' + ${evento.id}}" class="material-icons left">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </td>
+                </div>
             </tr>
         </tbody>
     </table>

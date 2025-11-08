@@ -111,4 +111,45 @@ public class EventoController {
             return "redirect:/eventos";
         }
     }
+
+    @RequestMapping(value = "/editar-evento/{id}", method = RequestMethod.GET)
+    public ModelAndView editarEvento(@PathVariable("id") long id) {
+        Evento evento = er.findById(id).orElse(null);
+        ModelAndView mv = new ModelAndView("evento/form-evento-edit");
+        mv.addObject("evento", evento);
+        return mv;
+    }
+
+    @RequestMapping(value = "/atualizar-evento", method = RequestMethod.POST)
+    public String atualizarEvento(@Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            return "redirect:/editar-evento/" + evento.getId();
+        }
+
+        er.save(evento); // Atualiza o evento
+        attributes.addFlashAttribute("mensagem", "Evento atualizado com sucesso!");
+        return "redirect:/eventos";
+    }
+
+    @RequestMapping(value = "/editar-convidado/{rg}", method = RequestMethod.GET)
+    public ModelAndView editarConvidado(@PathVariable("rg") String rg) {
+        Convidado convidado = cr.findByRg(rg);
+        ModelAndView mv = new ModelAndView("evento/convidado-edit");
+        mv.addObject("convidado", convidado);
+        mv.addObject("eventoId", convidado.getEvento().getId());
+        return mv;
+    }
+
+    @RequestMapping(value = "/atualizar-convidado", method = RequestMethod.POST)
+    public String atualizarConvidado(@Valid Convidado convidado, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos");
+            return "redirect:/editar-convidado/" + convidado.getRg();
+        }
+
+        cr.save(convidado);
+        attributes.addFlashAttribute("mensagem", "Convidado atualizado com sucesso!");
+        return "redirect:/" + convidado.getEvento().getId();
+    }
 }

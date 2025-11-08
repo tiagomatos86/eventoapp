@@ -46,3 +46,11 @@
 .texto-da-nav {
     padding-left: 20px;
 }
+
+.icone-acao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
